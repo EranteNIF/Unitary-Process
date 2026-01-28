@@ -1,0 +1,51 @@
+import math
+import matplotlib.pyplot as plt
+elementos = 0
+
+nombres = []
+pm_gmol = []
+peso_g = []
+n_moles = []
+
+
+elementos = int(input("Cuantos elementos son"))
+for i in range(elementos):
+    print("-----Elemento"+ str(i + 1) +"----")
+    nom = input("Nombre")
+    peso = float(input("Masa gramos"))
+    pm = float(input("Peso molecular"))
+
+    nombres.append(nom)
+    peso_g.append(peso)
+    pm_gmol.append(pm)
+    moles_ac = peso / pm
+    n_moles.append(moles_ac)
+    
+n_molest = sum(n_moles)
+print("\n=== Totales ===")
+print("\n_molest: {:.4f}".format(n_molest))
+input("Presiona enter para seguir")
+
+for i in range(elementos):
+    frac_molar = n_moles[i] / n_molest
+    flujo_molar = frac_molar * 100
+    print("\ngas:"+ nombres[i])
+    print("fraccion molar: {:.4f}".format(frac_molar))
+    print("flujo_molar: {:-4f}".format(flujo_molar))
+
+    print("-"*15)
+    if i < elementos - 1:
+        input("exe sig elemento")
+    else:
+        print("Fin de los calculos")
+
+print("\nGenerando gráfica...")
+
+
+plt.figure(figsize=(7, 7))
+
+plt.pie(n_moles, labels=nombres, autopct='%1.1f%%', startangle=140)
+
+plt.title('Composición Molar de la Mezcla')
+plt.axis('equal')  
+plt.show()
